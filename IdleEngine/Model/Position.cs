@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace IdleEngine.Model;
+﻿namespace IdleEngine.Model;
 
 public readonly struct Position(int q, int r)
 {
@@ -24,6 +17,15 @@ public readonly struct Position(int q, int r)
     public static int CalculateDistance(Position a, Position b)
     {
         var vector = a - b;
-        return Math.Abs((vector.Q + vector.R + vector.S) /2);
+        return Math.Abs((Math.Abs(vector.Q) + Math.Abs(vector.R) + Math.Abs(vector.S)) /2);
     }
+
+    public int CalculateDistance(Position other) => 
+        Math.Abs(
+            (
+                Math.Abs(Q - other.Q) +
+                Math.Abs(R - other.R) +
+                Math.Abs(S - other.S)
+            ) / 2
+        );
 }

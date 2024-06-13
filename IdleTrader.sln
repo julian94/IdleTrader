@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34601.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdleTraderAPI", "IdleTraderAPI\IdleTraderAPI.csproj", "{2B5E5A3C-96ED-415B-8712-E7DC0E2BF804}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdleTraderAPI", "IdleTraderAPI\IdleTraderAPI.csproj", "{2B5E5A3C-96ED-415B-8712-E7DC0E2BF804}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdleEngine", "IdleEngine\IdleEngine.csproj", "{FB3EC85D-12B8-4FCE-951B-93258E474CEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdleEngine", "IdleEngine\IdleEngine.csproj", "{FB3EC85D-12B8-4FCE-951B-93258E474CEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestEngine", "TestEngine\TestEngine.csproj", "{5C0C993B-AB80-4803-B407-307C89EE7204}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{FB3EC85D-12B8-4FCE-951B-93258E474CEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB3EC85D-12B8-4FCE-951B-93258E474CEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB3EC85D-12B8-4FCE-951B-93258E474CEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C0C993B-AB80-4803-B407-307C89EE7204}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C0C993B-AB80-4803-B407-307C89EE7204}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C0C993B-AB80-4803-B407-307C89EE7204}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C0C993B-AB80-4803-B407-307C89EE7204}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

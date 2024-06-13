@@ -1,5 +1,6 @@
 ﻿using IdleEngine.Model;
 using IdleEngine.Time;
+using System.Reflection.Metadata.Ecma335;
 
 namespace IdleEngine.Acting;
 
@@ -11,8 +12,8 @@ public class JumpAction(ShipID shipID, Position destination) : IAction
     {
         var ship = universe.Ships.Where(s => s.ID == shipID).FirstOrDefault();
 
-        var isInRange = ship.Position.HasValue && Position.CalculateDistance(ship.Position.Value, destination) < ship.JumpRange;
-        var hasSufficientFuel = ship.HasFuel;
+        var isInRange = ship is not null && ship.Position.HasValue && ship.Position.Value.CalculateDistance(destination) < ship.JumpRange;
+        var hasSufficientFuel = ship is not null && ship.HasFuel;
 
         return isInRange && hasSufficientFuel;
     }
@@ -23,6 +24,21 @@ public class JumpAction(ShipID shipID, Position destination) : IAction
         {
             eventList.Add(new JumpEntryEvent(shipID, timer.Now()));
             eventList.Add(new JumpArrivalEvent(shipID, destination, timer.AfterJump()));
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool TryDoAction(Universe universe, EventProcessor eventProcessor, GameTimer timer)
+    {
+        if (ActionCanBeDone(universe))
+        {
+            eventProcessor.AddEvent(new JumpEntryEvent(shipID, timer.Now()));
+            eventProcessor.AddEvent(new JumpArrivalEvent(shipID, destination, timer.AfterJump()));
+            
             return true;
         }
         else
