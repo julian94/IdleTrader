@@ -8,7 +8,7 @@ public class Engine
     private EventProcessor EventProcessor { get; set; }
     private Universe Universe { get; set; }
 
-    public void TryDoAction(IAction action) => throw new NotImplementedException();
+    public bool TryDoAction(IAction action) => throw new NotImplementedException();
     public void TryRemoveAction(ActionID id) => throw new NotImplementedException();
     public List<IAction> ListActions() => throw new NotImplementedException();
     public void ListEvents() => throw new NotImplementedException();

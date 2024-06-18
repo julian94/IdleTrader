@@ -1,11 +1,12 @@
 ﻿using IdleEngine.Model;
 using IdleEngine.Time;
-using System.Reflection.Metadata.Ecma335;
 
 namespace IdleEngine.Acting;
 
 public class JumpAction(ShipID shipID, Position destination) : IAction
 {
+    public const string ActionName = "jump";
+
     public ActionID ID { get; set; } = new();
 
     public bool ActionCanBeDone(Universe universe)
