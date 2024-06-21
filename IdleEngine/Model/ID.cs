@@ -2,13 +2,13 @@
 
 public class BaseID
 {
-    public int ActualID { get; set; }
+    public ulong ActualID { get; set; }
 
     public BaseID()
     {
-        ActualID = -1;
+        ActualID = 0ul;
     }
-    public BaseID(int number)
+    public BaseID(ulong number)
     {
         ActualID = number;
     }

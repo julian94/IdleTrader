@@ -19,20 +19,6 @@ public class JumpAction(ShipID shipID, Position destination) : IAction
         return isInRange && hasSufficientFuel;
     }
 
-    public bool TryDoAction(Universe universe, IList<IEvent> eventList, GameTimer timer)
-    {
-        if (ActionCanBeDone(universe))
-        {
-            eventList.Add(new JumpEntryEvent(shipID, timer.Now()));
-            eventList.Add(new JumpArrivalEvent(shipID, destination, timer.AfterJump()));
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
     public bool TryDoAction(Universe universe, EventProcessor eventProcessor, GameTimer timer)
     {
         if (ActionCanBeDone(universe))

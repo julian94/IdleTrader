@@ -4,13 +4,16 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.Threading.Tasks;
 using Discord.Interactions;
-using DiscordBot.IdleService;
 using System.Reflection;
+using IdleEngine;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer().AddSwaggerGen();
+
+var engine = new Engine();
+builder.Services.AddSingleton(engine);
+
 
 var app = builder.Build();
 

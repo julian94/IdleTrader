@@ -28,4 +28,9 @@ public readonly struct Position(int q, int r)
                 Math.Abs(S - other.S)
             ) / 2
         );
+
+    public override string ToString()
+    {
+        return $"({Q}, {R})";
+    }
 }
