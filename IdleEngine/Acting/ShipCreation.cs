@@ -10,7 +10,7 @@ public class ShipCreation(Ship ship) : IAction
     public bool ActionCanBeDone(Universe universe)
     {
         var playerAlreadyHasShip = universe.Ships.Where(s => s.Owner.ID == ship.Owner.ID).Any();
-        return playerAlreadyHasShip;
+        return !playerAlreadyHasShip;
     }
 
     public bool TryDoAction(Universe universe, EventProcessor eventProcessor, GameTimer timer)

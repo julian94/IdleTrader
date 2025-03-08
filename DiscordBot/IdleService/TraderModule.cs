@@ -51,8 +51,32 @@ public class TraderModule(Engine engine) : InteractionModuleBase<SocketInteracti
         [SlashCommand("list", "List systems within range.")]
         public async Task ListCommand() => await RespondAsync("Placeholder");
 
-        [SlashCommand("to", "Jump to a new system.")]
-        public async Task JumpToCommand(string system) => await RespondAsync("Placeholder");
+        [SlashCommand("to", "Jump to a new world.")]
+        public async Task JumpToCommand(string world)
+        {
+            var ship = engine.GetShip(Context.User.Id);
+            if (ship.Position == null || !ship.HasFuel)
+            {
+                await RespondAsync("Unable to jump, ship is already jumping.");
+            }
+            var targetWorld = engine.GetWorldByNameAndPosition(world, ship.Position.Value);
+
+            if (targetWorld == null)
+            {
+                await RespondAsync($"Unable to find a world named {world}.");
+            }
+
+            var jumpActionDone = engine.TryDoAction(new JumpAction(ship.ID, targetWorld.Position));
+
+            if (jumpActionDone)
+            {
+                await RespondAsync($"Your ship is now jumping to {world}");
+            }
+            else
+            {
+                await RespondAsync("Unable to jump for some reason.");
+            }
+        }
     }
 
     [Group("game", "Manage being in the game")]

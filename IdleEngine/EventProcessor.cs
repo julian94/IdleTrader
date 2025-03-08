@@ -7,11 +7,13 @@ public class EventProcessor()
 {
     // This needs to become thread-safe.
     // Should also do some batching of some sort as stuff that happens tomorrow doesn't need to be checked particularly often.
-    private List<IEvent> UnprocessedEvents { get; set; }
+    private List<IEvent> UnprocessedEvents { get; set; } = new List<IEvent>();
+    private List<IEvent> ProcessedEvents { get; set; } = new List<IEvent>();
 
     public void ProcessEvents(Universe universe, DateTime now)
     {
         IEnumerable<IEvent> pastEvents;
+        lock (UnprocessedEvents)
         {
             var allUnprocessedEvents = UnprocessedEvents;
             var futureEvents = allUnprocessedEvents.Where(e => e.WhenThisEventHappens > now);
@@ -22,12 +24,15 @@ public class EventProcessor()
         foreach (var e  in pastEvents)
         {
             e.DoEvent(universe);
+            ProcessedEvents.Add(e);
         }
     }
 
     public void AddEvent(IEvent e)
     {
-        // TODO: check for lock on UnprocessedEvents and potentially await unlock.
-        UnprocessedEvents.Add(e);
+        lock (UnprocessedEvents)
+        {
+            UnprocessedEvents.Add(e);
+        }
     }
 }

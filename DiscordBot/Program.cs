@@ -7,6 +7,8 @@ using System;
 using Discord.Interactions;
 using System.Reflection;
 using IdleEngine;
+using System.Threading.Tasks;
+using System.Threading;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer().AddSwaggerGen();
@@ -14,6 +16,8 @@ builder.Services.AddEndpointsApiExplorer().AddSwaggerGen();
 var engine = new Engine();
 builder.Services.AddSingleton(engine);
 
+var clockToken = new CancellationTokenSource();
+_ = ClockTicker(engine, new TimeSpan(0, 0, 0, 0, 100), clockToken.Token);
 
 var app = builder.Build();
 
@@ -48,4 +52,18 @@ app.MapGet("/hello", () =>
     return "Hello";
 }).WithOpenApi();
 
+app.MapGet("/universe", () =>
+{
+    return engine.GetUniverse();
+}).WithOpenApi();
+
 app.Run();
+
+static async Task ClockTicker(Engine e, TimeSpan interval, CancellationToken token)
+{
+    while (!token.IsCancellationRequested)
+    {
+        await Task.Delay(interval, token);
+        e.Tick();
+    }
+}
